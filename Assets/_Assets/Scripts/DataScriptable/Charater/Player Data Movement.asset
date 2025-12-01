@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Player Data Movement
   m_EditorClassIdentifier: 
   speed: 5
-  jumForce: 3
-  dashForce: 5
+  jumForce: 5
+  dashForce: 10
+  timeDelayDash: 3

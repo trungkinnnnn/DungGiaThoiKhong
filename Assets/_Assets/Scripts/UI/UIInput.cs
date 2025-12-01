@@ -8,6 +8,7 @@ public class UIInput : MonoBehaviour
     [SerializeField] HoldButton _buttonLeft;
     [SerializeField] HoldButton _buttonRight;
     [SerializeField] Button _buttonJump;
+    [SerializeField] Button _buttonDash;
 
     private string _tagNeedFind = "Player";
     private MoblieInput _moblieInput;
@@ -16,6 +17,7 @@ public class UIInput : MonoBehaviour
     {
         _moblieInput = FindPlayerInput();
         SetUpButtonJump();
+        SetButtonDash();
     }
 
     private MoblieInput FindPlayerInput()
@@ -33,6 +35,12 @@ public class UIInput : MonoBehaviour
     {
         if(_moblieInput == null) return;
         _buttonJump.onClick.AddListener(_moblieInput.OnJumpButton);
+    }    
+
+    private void SetButtonDash()
+    {
+        if (_moblieInput == null) return;
+        _buttonDash.onClick.AddListener(_moblieInput.OnDashButton);
     }    
 
     private void Update()

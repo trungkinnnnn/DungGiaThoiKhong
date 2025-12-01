@@ -8,4 +8,6 @@ public class PlayerDataMovement : ScriptableObject
     public float speed;
     public float jumForce;
     public float dashForce;
+    public float dashTime;
+    public float timeDelayDash;
 }
