@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerAnimationController : MonoBehaviour
+{
+    private static int _HAS_ANI_BOOL_ISGROUND = Animator.StringToHash("isGround");
+    private static int _HAS_ANI_BOOL_ISRUNNING = Animator.StringToHash("isRunning");
+    private static int _HAS_ANI_TRIGGER_ISJUMPUP = Animator.StringToHash("isJumpUp");
+    private static int _HAS_ANI_TRIGGER_ISJUMPDOWN = Animator.StringToHash("isJumpDown");
+    private static int _HAS_ANI_TRIGGER_ISATTACK = Animator.StringToHash("isAttacking");
+
+    private Animator _ani;
+
+    private void Start()
+    {
+        _ani = GetComponentInChildren<Animator>();
+    }
+
+
+    // ============== Service ================
+    public void SetIsGround(bool isGround) => _ani.SetBool(_HAS_ANI_BOOL_ISGROUND, isGround);
+    public void PlayAniRunning(bool value) => _ani.SetBool(_HAS_ANI_BOOL_ISRUNNING, value);  
+
+    public void PlayAniJumping() => _ani.SetTrigger(_HAS_ANI_TRIGGER_ISJUMPUP);
+
+    public void PlayAniAttack() => _ani.SetTrigger(_HAS_ANI_TRIGGER_ISATTACK);
+
+
+}

@@ -5,7 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/PlayerMovement")]
 public class PlayerDataMovement : ScriptableObject
 {
-    public float speed;
+    public float speedNormal;
+    public float speedAttack;
+    public float accelerationTime;
     public float jumForce;
     public float dashForce;
     public float dashTime;

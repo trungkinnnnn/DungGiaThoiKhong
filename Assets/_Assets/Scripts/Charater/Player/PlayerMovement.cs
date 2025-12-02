@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Net.WebSockets;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,10 +8,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform _groudCheckTransform;
     [SerializeField] LayerMask _layerGroundMask;
 
+    private float speedMovement;
     private bool _isGrounded = true;
     private bool _canDash = true;
-    private bool _isDashed = false;
 
+    private PlayerAnimationController _ani;
     private Rigidbody2D _rig;
     private IPlayerInput _input;
 
@@ -26,11 +28,13 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _rig = GetComponentInChildren<Rigidbody2D>();
+        _ani = GetComponent<PlayerAnimationController>();
+        speedMovement = _dataMovement.speedNormal;
     }
 
     private void Update()
     {
-        if (_isDashed) return;
+        if (_input.Block) return;
         CheckGround();
         HandleMove();
         HandleJump();
@@ -40,15 +44,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMove()
     {
-        var velocity = _rig.velocity;
-        velocity.x = _input.Horizontal * _dataMovement.speed;
-        _rig.velocity = velocity;
+        _ani.PlayAniRunning(_input.Horizontal != 0);
+        var targetVelocityX = _input.Horizontal * speedMovement;
+        float smooth = _dataMovement.accelerationTime;
+
+        float newVelocityX = Mathf.Lerp(_rig.velocity.x, targetVelocityX, smooth * Time.fixedDeltaTime);
+        _rig.velocity = new Vector2(newVelocityX, _rig.velocity.y);
     }
 
     private void HandleJump()
     {
         if (_isGrounded && _input.JumPressed)
         {
+            _ani.PlayAniJumping();
             _rig.AddForce(Vector2.up * _dataMovement.jumForce, ForceMode2D.Impulse);
             _input.ResetJump();
         }
@@ -65,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Dash()
     {
         _canDash = false;
-        _isDashed = true;
+        _input.Block = true;
 
         float originalGravity = _rig.gravityScale;
         _rig.gravityScale = 0f;
@@ -78,7 +86,8 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(_dataMovement.dashTime);
 
         _rig.gravityScale = originalGravity;
-        _isDashed = false;  
+        _input.Block = false;
+        _input.ResetDash();
 
         yield return new WaitForSeconds(_dataMovement.timeDelayDash);
         _canDash = true;
@@ -87,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
     private void CheckGround()
     {
         _isGrounded = Physics2D.OverlapCircle(_groudCheckTransform.position, 0.2f, _layerGroundMask);
+        _ani.SetIsGround(_isGrounded);
     }    
 
     private void ChangeScaleX()
@@ -99,6 +109,11 @@ public class PlayerMovement : MonoBehaviour
     }    
 
     // ============= Serivce ==============
-     public IPlayerInput GetPlayerInput() => _input;    
+    public IPlayerInput GetPlayerInput() => _input;    
 
+    public void IsAttack(bool value)
+    {
+        speedMovement = value ? _dataMovement.speedAttack : _dataMovement.speedNormal;
+    }    
+    
 }
