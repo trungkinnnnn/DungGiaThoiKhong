@@ -15,7 +15,7 @@ MonoBehaviour:
   speedNormal: 6
   speedAttack: -6
   accelerationTime: 15
-  jumForce: 10
+  jumForce: 13
   dashForce: 15
   dashTime: 0.2
   timeDelayDash: 1

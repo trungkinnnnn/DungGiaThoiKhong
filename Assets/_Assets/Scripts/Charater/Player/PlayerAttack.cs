@@ -7,6 +7,7 @@ using UnityEngine.Windows;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] PlayerDataAttack _dataAttack;
+    private float _timeDelayAttack = 0.2f;
 
     private bool _canAttack = true;
     private bool _isAttack;
@@ -44,7 +45,7 @@ public class PlayerAttack : MonoBehaviour
         yield return null;  
         _input.Block = true;  
 
-        yield return new WaitForSeconds(_dataAttack.timeAttack);
+        yield return new WaitForSeconds(_dataAttack.timeAttack + _timeDelayAttack);
        
         _input.Block = false;
         _movement.IsAttack(false);
