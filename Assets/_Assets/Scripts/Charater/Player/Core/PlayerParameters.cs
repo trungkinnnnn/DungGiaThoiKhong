@@ -13,7 +13,8 @@ public class PlayerParameters
     public bool IsGrounded;
     public bool IsFalling => !IsGrounded;
     public bool CanDash = true;
-    public bool CanAttack = true;
+    public bool CanAttack2 = false;
+    public bool CanAttack3 = false;
 
     public float DashTimer;
     public float AttackTimer;

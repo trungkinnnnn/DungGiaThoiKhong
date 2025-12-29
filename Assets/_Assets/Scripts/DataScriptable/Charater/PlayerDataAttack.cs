@@ -5,7 +5,27 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/PlayerAttack")]
 public class PlayerDataAttack : ScriptableObject
 {
-    public float damageAttack;
-    public float timeAttack = 1f;
-    public float attackCooldown = 1f;
+    public AttackData attack1;
+    public AttackData attack2;
+    public AttackData attack3;
+
+    public float comboCooldown = 1f;
+    
+}
+
+
+[System.Serializable]
+public class AttackData
+{
+    public float damage;
+
+    [Header("Timing")]
+    public float startup;
+    public float active;
+
+    [Header("Combo")]
+    public float comboWindow;
+
+    [Header("TimeBlock")]
+    public float timeBlock;
 }

@@ -12,6 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408caf650619cb14dab1bfa158750a80, type: 3}
   m_Name: Player Data Attack
   m_EditorClassIdentifier: 
-  damageAttack: 5
-  timeAttack: 0.5
-  attackCooldown: 1
+  attack1:
+    damage: 1
+    startup: 0.1
+    active: 0.3
+    comboWindow: 0.3
+    timeBlock: 0.5
+  attack2:
+    damage: 1
+    startup: 0.1
+    active: 0.2
+    comboWindow: 1
+    timeBlock: 0.4
+  attack3:
+    damage: 1
+    startup: 0.3
+    active: 0
+    comboWindow: 0
+    timeBlock: 2
+  comboCooldown: 2
