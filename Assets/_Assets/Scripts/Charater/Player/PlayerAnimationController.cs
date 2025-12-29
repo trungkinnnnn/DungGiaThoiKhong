@@ -12,7 +12,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     private Animator _ani;
 
-    private void Start()
+    private void Awake()
     {
         _ani = GetComponentInChildren<Animator>();
     }
@@ -22,7 +22,9 @@ public class PlayerAnimationController : MonoBehaviour
     public void SetIsGround(bool isGround) => _ani.SetBool(_HAS_ANI_BOOL_ISGROUND, isGround);
     public void PlayAniRunning(bool value) => _ani.SetBool(_HAS_ANI_BOOL_ISRUNNING, value);  
 
-    public void PlayAniJumping() => _ani.SetTrigger(_HAS_ANI_TRIGGER_ISJUMPUP);
+    public void PlayAniJumpUp() => _ani.SetTrigger(_HAS_ANI_TRIGGER_ISJUMPUP);
+
+    public void PlayAniJumDown() => _ani.SetTrigger(_HAS_ANI_TRIGGER_ISJUMPDOWN);
 
     public void PlayAniAttack() => _ani.SetTrigger(_HAS_ANI_TRIGGER_ISATTACK);
 

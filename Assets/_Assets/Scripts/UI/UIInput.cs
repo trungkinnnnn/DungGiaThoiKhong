@@ -12,7 +12,7 @@ public class UIInput : MonoBehaviour
 
     private string _tagNeedFind = "Player";
     private MoblieInput _moblieInput;
-    private PlayerMovement _player;
+    private PlayerController _player;
     private Vector3 _originalPosition;
 
     private void Start()
@@ -28,10 +28,10 @@ public class UIInput : MonoBehaviour
     {
         var player = GameObject.FindGameObjectWithTag(_tagNeedFind);
         _originalPosition = player.transform.position;
-        if (player.TryGetComponent<PlayerMovement>(out PlayerMovement movement))
+        if (player.TryGetComponent<PlayerController>(out PlayerController controller))
         {
-            _player = movement; 
-            IPlayerInput input = movement.GetPlayerInput();
+            _player = controller; 
+            IPlayerInput input = controller.GetInput();
             if(input is MoblieInput moblieInput) return moblieInput;    
         }    
         return null;

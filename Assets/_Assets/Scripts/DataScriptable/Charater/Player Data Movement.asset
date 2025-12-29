@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Player Data Movement
   m_EditorClassIdentifier: 
   speedNormal: 6
-  speedAttack: -6
-  accelerationTime: 15
+  speedAttack: 2
+  accelerationTime: 20
   jumForce: 13
   dashForce: 15
   dashTime: 0.2

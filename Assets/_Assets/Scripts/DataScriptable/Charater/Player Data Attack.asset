@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Player Data Attack
   m_EditorClassIdentifier: 
   damageAttack: 5
-  timeAttack: 0.4
-  timeDelayAttack: 0.6
+  timeAttack: 0.5
+  attackCooldown: 1

@@ -6,6 +6,6 @@ using UnityEngine;
 public class PlayerDataAttack : ScriptableObject
 {
     public float damageAttack;
-    public float timeAttack = 0.4f;
-    public float timeDelayAttack;
+    public float timeAttack = 1f;
+    public float attackCooldown = 1f;
 }

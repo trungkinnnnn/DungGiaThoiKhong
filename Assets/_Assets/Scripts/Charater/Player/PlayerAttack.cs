@@ -10,7 +10,6 @@ public class PlayerAttack : MonoBehaviour
     private float _timeDelayAttack = 0.2f;
 
     private bool _canAttack = true;
-    private bool _isAttack;
 
     private PlayerAnimationController _ani;
     private PlayerMovement _movement;
@@ -51,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
         _movement.IsAttack(false);
         _input.ResetAttack();
 
-        yield return new WaitForSeconds(_dataAttack.timeDelayAttack);
+        yield return new WaitForSeconds(_dataAttack.attackCooldown);
         _canAttack = true;
     }
 

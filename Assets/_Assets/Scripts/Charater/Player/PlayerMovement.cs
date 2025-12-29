@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_isGrounded && _input.JumPressed)
         {
-            _ani.PlayAniJumping();
+            _ani.PlayAniJumpUp();
             _rig.AddForce(Vector2.up * _dataMovement.jumForce, ForceMode2D.Impulse);
             _input.ResetJump();
         }
