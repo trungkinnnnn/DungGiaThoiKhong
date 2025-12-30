@@ -14,20 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack1:
     damage: 1
-    startup: 0.1
-    active: 0.3
-    comboWindow: 0.3
-    timeBlock: 0.5
+    startup: 0.2
+    active: 0.4
+    timeBlock: 0.2
   attack2:
     damage: 1
-    startup: 0.1
-    active: 0.2
-    comboWindow: 1
-    timeBlock: 0.4
+    startup: 0.2
+    active: 0.3
+    timeBlock: 0.3
   attack3:
     damage: 1
     startup: 0.3
-    active: 0
-    comboWindow: 0
-    timeBlock: 2
+    active: 1.5
+    timeBlock: 0
   comboCooldown: 2

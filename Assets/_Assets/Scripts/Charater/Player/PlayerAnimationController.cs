@@ -11,7 +11,8 @@ public class PlayerAnimationController : MonoBehaviour
     private static int _HAS_ANI_TRIGGER_ISATTACK = Animator.StringToHash("isAttacking");
     private static int _HAS_ANI_TRIGGER_ISATTACK2 = Animator.StringToHash("isAttacking2");
     private static int _HAS_ANI_TRIGGER_ISATTACK3 = Animator.StringToHash("isAttacking3");
-
+    private static int _HAS_ANI_TRIGGER_ISATTACKJUMP = Animator.StringToHash("isAttackJump");
+    
     private Animator _ani;
 
     private void Awake()
@@ -31,6 +32,8 @@ public class PlayerAnimationController : MonoBehaviour
     public void PlayAniAttack() => _ani.SetTrigger(_HAS_ANI_TRIGGER_ISATTACK);
     public void PlayAniAttack2() => _ani.SetTrigger(_HAS_ANI_TRIGGER_ISATTACK2);
     public void PlayAniAttack3() => _ani.SetTrigger(_HAS_ANI_TRIGGER_ISATTACK3);
+
+    public void PlayAniAttackJump() => _ani.SetTrigger(_HAS_ANI_TRIGGER_ISATTACKJUMP);
 
 
 }

@@ -61,30 +61,19 @@ public class PlayerController : MonoBehaviour
         _jumpUpState = new JumpUpStateBehaviour(_context);
         _jumpDownState = new JumpDownStateBehaviour(_context);
         _dashState = new DashStateBehaviour(_context);
-        _attackState = new Attack1StateBehaviour(_context);
-        _attack2State = new Attack2StateBehaviour(_context);
+
         _attack3State = new Attack3StateBehaviour(_context);
+        _attack2State = new Attack2StateBehaviour(_context, _stateMachine, _attack3State);
+        _attackState = new Attack1StateBehaviour(_context, _stateMachine, _attack2State);
     }       
 
     private void SetUpTransition()
     {
 
         // ========== AnyState Trigger =========
-
-        _stateMachine.AddAnyTransition(_attack3State, () =>
-            _context.Parameters.AttackPressed && _context.Parameters.CanAttack3 && _context.Parameters.IsGrounded
-        );
-
-        _stateMachine.AddAnyTransition(_attack2State, () =>
-            _context.Parameters.AttackPressed && _context.Parameters.CanAttack2
-        );
-
         _stateMachine.AddAnyTransition(_attackState, () =>
             _context.Parameters.AttackPressed && _context.Parameters.AttackTimer <= 0
         );
-
-
-
 
 
         _stateMachine.AddAnyTransition(_jumpUpState, () =>
@@ -115,9 +104,11 @@ public class PlayerController : MonoBehaviour
         _stateMachine.AddTransition(_jumpDownState, _idleState, () => _context.Parameters.IsGrounded );
 
         // ============== AttackFlow ==============
-        _stateMachine.AddTransition(_attackState, _idleState, () => _context.Parameters.AttackTimer <= 0);
-        _stateMachine.AddTransition(_attack2State, _idleState, () => _context.Parameters.AttackTimer <= 0);
-        _stateMachine.AddTransition(_attack3State, _idleState, () => _context.Parameters.AttackTimer <= 0);
+        _stateMachine.AddTransition(_attackState, _jumpDownState, () => _context.Parameters.DoneAttack && _context.Parameters.IsFalling);
+
+        _stateMachine.AddTransition(_attackState, _idleState, () => _context.Parameters.DoneAttack && _context.Parameters.IsGrounded);
+        _stateMachine.AddTransition(_attack2State, _idleState, () => _context.Parameters.DoneAttack);
+        _stateMachine.AddTransition(_attack3State, _idleState, () => _context.Parameters.DoneAttack);
     }
 
     private void Start()
@@ -130,10 +121,6 @@ public class PlayerController : MonoBehaviour
         UpdateParameters();
         _stateMachine.Update();
         UpdateVisuals();
-        if(_context.Parameters.AttackPressed && _context.Parameters.CanAttack3)
-        {
-            Debug.Log("Attack3 ready");
-        }
     }
 
     private void UpdateParameters()

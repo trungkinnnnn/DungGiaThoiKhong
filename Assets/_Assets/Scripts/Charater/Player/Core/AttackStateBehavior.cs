@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public abstract class AttackStateBehavior : IStateBehaviour
@@ -15,6 +14,7 @@ public abstract class AttackStateBehavior : IStateBehaviour
         PlayAnimation();
         _context.Parameters.AttackTimer = _context.DataAttack.comboCooldown;
         _context.Input.Block = true;
+        _context.Parameters.DoneAttack = false; 
     }
 
     protected abstract void PlayAnimation();
@@ -47,36 +47,52 @@ public abstract class AttackStateBehavior : IStateBehaviour
         switch (_phase)
         {
             case AttackPhase.Startup:
-                if (_timer >= _data.startup)
+                if(_timer >= _data.startup)
                 {
-                    //On hitbox
-                    _phase = AttackPhase.Active;
+                    EnterActive();
                 }
                 break;
             case AttackPhase.Active:
-                if (_timer >= _data.active + _data.startup)
+                if(_timer >= _data.active)
                 {
-                    // Off Hitbox
-                    _phase = AttackPhase.Recovery;
-                    OnActiveAttack();
+                    EnterRecovery();
                 }
                 break;
             case AttackPhase.Recovery:
-                if (_timer >= _data.active + _data.startup + _data.comboWindow)
+                TryCombo();
+                if(_timer >= _data.timeBlock)
                 {
-                    OffActiveAttack();
-                }
+                    _context.Parameters.DoneAttack = true;
+                    Exit();
+                }    
                 break;
         }
 
-        if(_timer >= _data.timeBlock)
-        {
-            _context.Input.Block = false;
-        }
     }
 
-    protected abstract void OnActiveAttack();
-    protected abstract void OffActiveAttack();
+    private void EnterActive()
+    {
+        // onhitbox
+        _phase = AttackPhase.Active;
+        _timer = 0;
+    }
+
+    private void EnterRecovery()
+    {
+        // off hitbox
+        _phase = AttackPhase.Recovery;
+        _timer = 0;
+
+        _context.Input.Block = false;
+    }
+
+    private void TryCombo()
+    {
+        if (!_context.Input.AttackPressed) return;
+        ChangeStateAttack();
+    }
+
+    protected abstract void ChangeStateAttack();
 
 }
 

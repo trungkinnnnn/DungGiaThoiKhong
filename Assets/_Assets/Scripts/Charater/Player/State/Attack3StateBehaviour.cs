@@ -7,9 +7,8 @@ public class Attack3StateBehaviour : AttackStateBehavior
         _context = context;
         _data = _context.DataAttack.attack3;
     }
-    protected override void OffActiveAttack() { return; }
 
-    protected override void OnActiveAttack() { return; }
+    protected override void ChangeStateAttack() { }
 
     protected override void PlayAnimation()
     {
@@ -17,9 +16,4 @@ public class Attack3StateBehaviour : AttackStateBehavior
         _context.Animator.PlayAniAttack3();
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-        _context.Parameters.CanAttack3 = false;
-    }
 }

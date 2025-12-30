@@ -23,9 +23,6 @@ public class AttackData
     public float startup;
     public float active;
 
-    [Header("Combo")]
-    public float comboWindow;
-
     [Header("TimeBlock")]
     public float timeBlock;
 }
