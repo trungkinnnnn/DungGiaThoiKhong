@@ -22,13 +22,6 @@ public class Attack1StateBehaviour : AttackStateBehavior
     protected override void PlayAnimation()
     {
         Debug.Log("State Attack1");
-        if(_context.Parameters.IsGrounded)
-        {
-            _context.Animator.PlayAniAttack();
-        }else
-        {
-            _context.Animator.PlayAniAttackJump();
-        }    
-        
+        _context.Animator.PlayAniAttack();
     }
 }

@@ -11,5 +11,5 @@ public class PlayerDataMovement : ScriptableObject
     public float jumForce;
     public float dashForce;
     public float dashTime;
-    public float timeDelayDash;
+    public float cooldownDash;
 }

@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         _input.Block = false;
         _input.ResetDash();
 
-        yield return new WaitForSeconds(_dataMovement.timeDelayDash);
+        yield return new WaitForSeconds(_dataMovement.cooldownDash);
         _canDash = true;
     }    
 

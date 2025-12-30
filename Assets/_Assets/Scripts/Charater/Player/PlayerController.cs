@@ -75,19 +75,20 @@ public class PlayerController : MonoBehaviour
             _context.Parameters.AttackPressed && _context.Parameters.AttackTimer <= 0
         );
 
+        _stateMachine.AddAnyTransition(_dashState, () =>
+            _context.Parameters.DashTimer <= 0 && _context.Parameters.DashPressed
+        );
 
         _stateMachine.AddAnyTransition(_jumpUpState, () =>
             _context.Parameters.JumPressed && _context.Parameters.IsGrounded
         );
 
         _stateMachine.AddAnyTransition(_jumpDownState, () =>
-            _context.Parameters.IsFalling && _context.Rigidbody.velocity.y < -0.5f && 
+            !_context.Parameters.IsGrounded && _context.Rigidbody.velocity.y < -0.5f && 
             !_context.Input.Block
         );
 
-        _stateMachine.AddAnyTransition(_dashState, () =>
-            _context.Parameters.CanDash && _context.Parameters.DashPressed
-        );
+
 
         // ============== Idle <=> Run ===========
 
@@ -103,9 +104,12 @@ public class PlayerController : MonoBehaviour
         _stateMachine.AddTransition(_jumpUpState, _jumpDownState, () => _context.Rigidbody.velocity.y <= 0 && !_context.Input.Block);
         _stateMachine.AddTransition(_jumpDownState, _idleState, () => _context.Parameters.IsGrounded );
 
-        // ============== AttackFlow ==============
-        _stateMachine.AddTransition(_attackState, _jumpDownState, () => _context.Parameters.DoneAttack && _context.Parameters.IsFalling);
+        // ============== DashFlow ================
+        _stateMachine.AddTransition(_dashState, _idleState, () => _context.Parameters.DoneDash && _context.Parameters.IsGrounded);
+        _stateMachine.AddTransition(_dashState, _jumpDownState, () => _context.Parameters.DoneDash && !_context.Parameters.IsGrounded);
 
+        // ============== AttackFlow ==============
+        _stateMachine.AddTransition(_attackState, _jumpDownState, () => _context.Parameters.DoneAttack && !_context.Parameters.IsGrounded);
         _stateMachine.AddTransition(_attackState, _idleState, () => _context.Parameters.DoneAttack && _context.Parameters.IsGrounded);
         _stateMachine.AddTransition(_attack2State, _idleState, () => _context.Parameters.DoneAttack);
         _stateMachine.AddTransition(_attack3State, _idleState, () => _context.Parameters.DoneAttack);

@@ -8,12 +8,9 @@ public class PlayerParameters
     public bool AttackPressed;
     public bool DashPressed;
 
-    
-
     public bool IsGrounded;
-    public bool IsFalling => !IsGrounded;
-    public bool CanDash = true;
     public bool DoneAttack = true;
+    public bool DoneDash = true;
 
     public float DashTimer;
     public float AttackTimer;
