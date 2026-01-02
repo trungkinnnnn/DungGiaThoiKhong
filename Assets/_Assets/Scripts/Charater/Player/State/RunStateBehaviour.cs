@@ -11,7 +11,7 @@ public class RunStateBehaviour : IStateBehaviour
 
     public void Enter()
     {
-        _context.Animator.PlayAniRunning(true);
+        _context.Animator.PlayAniRunning(true); 
         Debug.Log("State Run");
     }
 
@@ -20,18 +20,6 @@ public class RunStateBehaviour : IStateBehaviour
        _context.Animator.PlayAniRunning(false);
     }
 
-    public void Update()
-    {
-        UpdatePosition();
-    }
+    public void Update() { }
 
-    private void UpdatePosition()
-    {
-        float targetVelocityX = _context.Parameters.Horizontal * _context.DataMovement.speedNormal;
-        float smooth = _context.DataMovement.accelerationTime;
-
-        float newVeloctyX = Mathf.Lerp(_context.Rigidbody.velocity.x , targetVelocityX, smooth * Time.fixedDeltaTime);
-
-        _context.Rigidbody.velocity = new Vector2(newVeloctyX, _context.Rigidbody.velocity.y); 
-    }
 }

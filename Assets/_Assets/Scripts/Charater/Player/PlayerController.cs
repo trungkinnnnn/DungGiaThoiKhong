@@ -12,10 +12,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform _groundCheckTransform;
     [SerializeField] LayerMask _layerGroundMark;
 
+    private Movement _movement;
     private PlayerContext _context;
-    private PlayerStateMachine _stateMachine;
+    private StateMachine _stateMachine;
     private IPlayerInput _input;
 
+
+    // State
     private IdleStateBehaviour _idleState;
     private RunStateBehaviour _runState;
     private JumpUpStateBehaviour _jumpUpState;
@@ -36,8 +39,8 @@ public class PlayerController : MonoBehaviour
         InitContext();
         InitState();
         SetUpTransition();
-        
-        
+
+        _movement = new Movement(_context);
     }
 
     private void InitContext()
@@ -54,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     private void InitState()
     {
-        _stateMachine = new PlayerStateMachine();
+        _stateMachine = new StateMachine();
 
         _idleState = new IdleStateBehaviour(_context);
         _runState = new RunStateBehaviour(_context);
@@ -125,6 +128,11 @@ public class PlayerController : MonoBehaviour
         UpdateParameters();
         _stateMachine.Update();
         UpdateVisuals();
+    }
+
+    private void FixedUpdate()
+    {
+        _movement.UpdatePosition();
     }
 
     private void UpdateParameters()

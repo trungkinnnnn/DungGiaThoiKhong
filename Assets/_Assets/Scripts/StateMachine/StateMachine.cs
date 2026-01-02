@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateMachine
+public class StateMachine
 {
     public IStateBehaviour CurrentState { get; private set; }   
     private List<Transition> _transitions = new List<Transition>(); 

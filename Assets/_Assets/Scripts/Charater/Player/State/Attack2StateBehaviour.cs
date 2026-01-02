@@ -2,9 +2,9 @@
 
 public class Attack2StateBehaviour : AttackStateBehavior
 {
-    protected PlayerStateMachine _stateMachine;
+    protected StateMachine _stateMachine;
     private IStateBehaviour _stateAttack3;
-    public Attack2StateBehaviour(PlayerContext context, PlayerStateMachine stateMachine, IStateBehaviour state)
+    public Attack2StateBehaviour(PlayerContext context, StateMachine stateMachine, IStateBehaviour state)
     {
         _context = context;
         _data = _context.DataAttack.attack2;

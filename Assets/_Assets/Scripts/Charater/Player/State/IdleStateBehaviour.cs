@@ -15,8 +15,9 @@ public class IdleStateBehaviour : IStateBehaviour
     public void Enter()
     {
         _context.Rigidbody.velocity = new Vector2(0, _context.Rigidbody.velocity.y);
+        _context.Parameters.currentSpeed = _context.DataMovement.speedNormal;
         _context.Animator.PlayAniRunning(false);
-        Debug.Log("State Idle");
+        
     }
 
     public void Exit() { }

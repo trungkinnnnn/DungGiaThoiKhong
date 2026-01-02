@@ -1,7 +1,10 @@
+using UnityEngine.Experimental.GlobalIllumination;
+
 public class PlayerParameters
 {
     // Input
     public float Horizontal;
+    public float currentSpeed;
 
     // Trigger
     public bool JumPressed;

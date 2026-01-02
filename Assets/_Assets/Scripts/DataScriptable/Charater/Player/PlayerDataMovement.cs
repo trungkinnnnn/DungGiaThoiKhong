@@ -7,7 +7,7 @@ public class PlayerDataMovement : ScriptableObject
 {
     public float speedNormal;
     public float speedAttack;
-    public float accelerationTime;
+    public float acceleration;
     public float jumForce;
     public float dashForce;
     public float dashTime;

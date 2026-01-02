@@ -13,6 +13,7 @@ public abstract class AttackStateBehavior : IStateBehaviour
         _phase = AttackPhase.Startup;
         PlayAnimation();
         _context.Parameters.AttackTimer = _context.DataAttack.comboCooldown;
+        _context.Parameters.currentSpeed = _context.DataMovement.speedAttack;
         _context.Input.Block = true;
         _context.Parameters.DoneAttack = false; 
     }
@@ -26,18 +27,7 @@ public abstract class AttackStateBehavior : IStateBehaviour
 
     public void Update()
     {
-        UpdatePosition();
         HandleAttackTiming();
-    }
-
-    private void UpdatePosition()
-    {
-        float targetVelocityX = _context.Parameters.Horizontal * _context.DataMovement.speedAttack;
-        float smooth = _context.DataMovement.accelerationTime;
-
-        float newVeloctyX = Mathf.Lerp(_context.Rigidbody.velocity.x, targetVelocityX, smooth * Time.fixedDeltaTime);
-
-        _context.Rigidbody.velocity = new Vector2(newVeloctyX, _context.Rigidbody.velocity.y);
     }
 
     private void HandleAttackTiming()

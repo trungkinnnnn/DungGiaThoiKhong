@@ -2,9 +2,9 @@
 
 public class Attack1StateBehaviour : AttackStateBehavior
 {
-    private PlayerStateMachine _stateMachine;
+    private StateMachine _stateMachine;
     private IStateBehaviour _stateAttack2;
-    public Attack1StateBehaviour(PlayerContext context, PlayerStateMachine state, IStateBehaviour attack2)
+    public Attack1StateBehaviour(PlayerContext context, StateMachine state, IStateBehaviour attack2)
     {
         _context = context;
         _data = context.DataAttack.attack1;
