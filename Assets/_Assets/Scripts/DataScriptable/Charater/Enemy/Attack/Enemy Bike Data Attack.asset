@@ -10,5 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10ec191dd7d526c4199b1c014969a6a6, type: 3}
-  m_Name: Ranger Data Attack
+  m_Name: Enemy Bike Data Attack
   m_EditorClassIdentifier: 
+  damage: 1
+  timeAttackStart: 0.3
+  timeAttackActive: 0.15
+  timeAttackEnd: 0.3
+  maxRanger: 4
+  minRanger: 4
+  cooldownAttack: 4

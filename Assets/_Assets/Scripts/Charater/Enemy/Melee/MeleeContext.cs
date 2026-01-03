@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class RangerContext
+public class MeleeContext
 {
     public Transform Transform;
     public Rigidbody2D Rigidbody;
@@ -13,7 +11,7 @@ public class RangerContext
 
     public PlayerSingle Player;
 
-    public RangerContext(Transform transform ,Rigidbody2D rigidbody2D, EnemyDataAttack dataAttack, EnemyDataMovement dataMovement, EnemyAnimationController animator)
+    public MeleeContext(Transform transform, Rigidbody2D rigidbody2D, EnemyDataAttack dataAttack, EnemyDataMovement dataMovement, EnemyAnimationController animator)
     {
         Transform = transform;
         Rigidbody = rigidbody2D;

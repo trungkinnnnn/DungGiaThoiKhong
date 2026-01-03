@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class IdleState : IStateBehaviour
+public class RangerIdleState : IStateBehaviour
 {
     private RangerContext _context;
     private float _timeHoveState;
-    public IdleState(RangerContext rangerContext)
+    public RangerIdleState(RangerContext rangerContext)
     {
         _context = rangerContext;
     }

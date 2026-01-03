@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class MoveRangerAttackState : IStateBehaviour
+public class RangerChaseState : IStateBehaviour
 {
     private RangerContext _context;
    
-    public MoveRangerAttackState(RangerContext rangerContext)
+    public RangerChaseState(RangerContext rangerContext)
     {
         _context = rangerContext;
     }

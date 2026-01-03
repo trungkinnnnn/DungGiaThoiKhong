@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Data/RangerDataAttack ")]
-public class RangerDataAttack : ScriptableObject
+[CreateAssetMenu(menuName = "Data/EnemyDataAttack ")]
+public class EnemyDataAttack : ScriptableObject
 {
     public float damage = 1f;
     public float timeAttackStart = 0.5f;

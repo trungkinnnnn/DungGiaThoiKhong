@@ -1,12 +1,12 @@
 using UnityEngine;
-public class IdleMoveState : IStateBehaviour
+public class RangerPatrolState : IStateBehaviour
 {
     private RangerContext _context;
     private float _timeHoveState;
     private float _moveDirX;
     private float _verticalTargetY;
     private float _changeVeticalTime;
-    public IdleMoveState(RangerContext rangerContext) 
+    public RangerPatrolState(RangerContext rangerContext) 
     {
         _context = rangerContext;
     }

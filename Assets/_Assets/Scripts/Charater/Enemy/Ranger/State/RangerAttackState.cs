@@ -40,9 +40,6 @@ public class RangerAttackState : IStateBehaviour
         Vector2 dir = value - _context.Transform.position;
 
         if (dir.x < 0) dir = -dir;
-
-        Debug.Log(dir);
-
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         _startRot = _context.Transform.rotation;
         _endRot = Quaternion.Euler(0, 0, angle);

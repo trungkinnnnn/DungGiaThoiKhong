@@ -1,21 +1,20 @@
-using TMPro;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public class RangerController : MonoBehaviour
+public class MeleeController : MonoBehaviour
 {
     [SerializeField] EnemyDataAttack _dataAttack;
     [SerializeField] EnemyDataMovement _dataMovement;
 
-    [SerializeField] GameObject _attackObj;
-
     private WorldBoundsChecker _boundsChecker;
-
-    private RangerContext _context;
-    private StateMachine _stateMachine;
-    private RangerIdleState _idleState;
-    private RangerPatrolState _patrolState;
-    private RangerChaseState _chaseState;
-    private RangerAttackState _attackState;
+    
+    protected MeleeContext _context;
+    protected StateMachine _stateMachine;
+    private MeleeIdleState _idleState;
+    private MeleePatrolState _patrolState;
+    protected MeleeChaseState _chaseState;
     private void Start()
     {
         InitContext();
@@ -24,32 +23,32 @@ public class RangerController : MonoBehaviour
 
         _boundsChecker = GetComponent<WorldBoundsChecker>();
         _stateMachine.Init(_idleState);
+        //_context.Parameters.IsCombat = false;
     }
 
     private void InitContext()
     {
-        _context = new RangerContext(
+        _context = new MeleeContext(
             transform,
             GetComponent<Rigidbody2D>(),
             _dataAttack,
             _dataMovement,
             GetComponent<EnemyAnimationController>()
-           );
-    }
+            );
+    }    
 
-    private void InitState()
+
+    protected virtual void InitState()
     {
         _stateMachine = new StateMachine();
-        _idleState = new RangerIdleState(_context);
-        _patrolState = new RangerPatrolState(_context);
-        _chaseState = new RangerChaseState(_context);
-        _attackState = new RangerAttackState(_context, _attackObj);
+        _idleState = new MeleeIdleState(_context);
+        _patrolState = new MeleePatrolState(_context);
+        _chaseState = new MeleeChaseState(_context);
     }
 
-    private void SetUpTransition()
+    protected virtual void SetUpTransition()
     {
         // ============== AnyState =================
-        _stateMachine.AddAnyTransition(_attackState, () => _context.Parameters.CanAttack && _context.Parameters.TimeAttack <= 0);
         _stateMachine.AddAnyTransition(_chaseState, () => !_context.Parameters.IsBlock && _context.Parameters.IsCombat);
 
         // ============== IdleMove flow ==============
@@ -57,37 +56,36 @@ public class RangerController : MonoBehaviour
         _stateMachine.AddTransition(_idleState, _patrolState, () => !_context.Parameters.IsBlock && _context.Parameters.IsRunning);
 
         // ============== Attack Flow ================
-        _stateMachine.AddTransition(_attackState, _chaseState, () => !_context.Parameters.CanAttack && _context.Parameters.IsCombat);
-
     }
 
     private void Update()
     {
         UpdateParameters();
-        _stateMachine.Update();
+        _stateMachine?.Update();
     }
 
     private void FixedUpdate()
     {
-        _context.Rigidbody.velocity = _context.Parameters.DesiredVelocity;
+        if (_context.Parameters.IsBlock) return;
+        var velocity = _context.Rigidbody.velocity;
+        velocity.x = _context.Parameters.DesiredVelocity.x;
+        _context.Rigidbody.velocity = velocity;
     }
 
     private void UpdateParameters()
     {
-        UpdateBoundsCheck();
+        UpdateBounds();
         UpdateTime();
-    }   
+    }
 
-    private void UpdateBoundsCheck()
+    private void UpdateBounds()
     {
-        _context.Parameters.IsTop = _boundsChecker.IsTop();
-        _context.Parameters.IsBottom = _boundsChecker.IsBottom();
         _context.Parameters.IsForward = _boundsChecker.IsForward();
-    }    
+    }
 
     private void UpdateTime()
     {
-        if(_context.Parameters.TimeAttack > 0) _context.Parameters.TimeAttack -= Time.deltaTime;
-    }    
+        if(_context.Parameters.TimeAttack > 0) _context.Parameters.TimeAttack -= Time.deltaTime;    
+    }
 
 }
