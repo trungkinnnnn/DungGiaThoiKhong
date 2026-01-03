@@ -6,8 +6,9 @@ public class MeleeChaseState : IStateBehaviour
     {
         _context = context;
     }
-    public void Enter() { _context.Parameters.CanAttack = false; }
-
+    public void Enter() {
+        _context.Parameters.CanAttack = false; 
+    }
 
     public void Exit() { _context.Parameters.DesiredVelocity = Vector2.zero; }
 
@@ -31,11 +32,13 @@ public class MeleeChaseState : IStateBehaviour
         if (distance > _context.DataAttack.maxRanger)
         {
             velocity.x = dirToPlayer.x * _context.DataMovement.speedCombat;
+            _context.Animator.SetBoolAniRunning(true);
         }
         else
         {
             velocity = Vector2.zero;
             _context.Parameters.CanAttack = true;
+            _context.Animator.SetBoolAniRunning(false);
         }
 
         _context.Parameters.DesiredVelocity = Vector2.MoveTowards(_context.Parameters.DesiredVelocity, 

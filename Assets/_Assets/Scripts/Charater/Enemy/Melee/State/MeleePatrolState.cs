@@ -11,6 +11,7 @@ public class MeleePatrolState : IStateBehaviour
     }
     public void Enter()
     {
+        _context.Animator.SetBoolAniRunning(true);
         _timeHoveState = _context.DataMovement.timeMove;
         _moveDirX = Random.value < 0.5f ? -1 : 1;
         Flip();

@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyAnimationController : MonoBehaviour
@@ -12,7 +8,7 @@ public class EnemyAnimationController : MonoBehaviour
 
     private Animator _animator;
 
-    private void Start()
+    private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
     }

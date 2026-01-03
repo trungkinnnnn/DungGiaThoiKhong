@@ -55,7 +55,6 @@ public class MeleeController : MonoBehaviour
         _stateMachine.AddTransition(_patrolState, _idleState, () => !_context.Parameters.IsBlock && !_context.Parameters.IsRunning);
         _stateMachine.AddTransition(_idleState, _patrolState, () => !_context.Parameters.IsBlock && _context.Parameters.IsRunning);
 
-        // ============== Attack Flow ================
     }
 
     private void Update()

@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10ec191dd7d526c4199b1c014969a6a6, type: 3}
-  m_Name: Enemy Bike Data Attack
+  m_Script: {fileID: 11500000, guid: c3f56a0a862ba934e9685b616afae65b, type: 3}
+  m_Name: Enemy Car Data Movement
   m_EditorClassIdentifier: 
-  damage: 1
-  timeAttackStart: 1
-  timeAttackActive: 0.15
-  timeAttackEnd: 1
-  maxRanger: 4
-  minRanger: 4
-  cooldownAttack: 4
+  speedNormal: 1
+  speedCombat: 2
+  speedVerticalY: 0
+  acceleration: 10
+  timeStop: 3
+  timeMove: 5

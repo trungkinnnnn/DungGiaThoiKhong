@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class MeleeIdleState : IStateBehaviour
@@ -13,6 +14,7 @@ public class MeleeIdleState : IStateBehaviour
     public void Enter()
     {
         _timeHoveState = _context.DataMovement.timeStop;
+        _context.Animator.SetBoolAniRunning(false);
         Debug.Log("Idle");
     }
 
