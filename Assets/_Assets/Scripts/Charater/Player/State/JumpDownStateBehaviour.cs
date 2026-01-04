@@ -11,7 +11,6 @@ public class JumpDownStateBehaviour : IStateBehaviour
     public void Enter()
     {
         _context.Animator.PlayAniJumDown();
-        Debug.Log("JumpDown");
     }
 
     public void Exit()

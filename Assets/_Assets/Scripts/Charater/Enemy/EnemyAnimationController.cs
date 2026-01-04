@@ -6,7 +6,7 @@ public class EnemyAnimationController : MonoBehaviour
     private static int _HAS_ANI_TRIGGER_ATTACK = Animator.StringToHash("isAttack");
     private static int _HAS_ANI_TRIGGER_TAKEDAME = Animator.StringToHash("isTakeDame");
 
-    private Animator _animator;
+    protected Animator _animator;
 
     private void Awake()
     {

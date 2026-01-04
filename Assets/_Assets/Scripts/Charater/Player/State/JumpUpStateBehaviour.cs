@@ -13,7 +13,6 @@ public class JumpUpStateBehaviour : IStateBehaviour
     {
         _context.Animator.PlayAniJumpUp();
         _context.Rigidbody.AddForce(Vector2.up * _context.DataMovement.jumForce , ForceMode2D.Impulse);
-        Debug.Log("JumpUp");
     }
 
     public void Exit()

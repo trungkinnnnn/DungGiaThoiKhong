@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ec191dd7d526c4199b1c014969a6a6, type: 3}
   m_Name: Enemy Drone Data Attack
   m_EditorClassIdentifier: 
+  damage: 1
+  timeAttackStart: 0.5
+  timeAttackActive: 1
+  timeAttackEnd: 0.5
+  maxRanger: 4
+  minRanger: 3.5
+  cooldownAttack: 4

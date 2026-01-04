@@ -11,7 +11,6 @@ public class RangerIdleState : IStateBehaviour
     public void Enter()
     {
         _timeHoveState = _context.DataMovement.timeStop;
-        Debug.Log("Idle");
     }
 
     public void Exit()

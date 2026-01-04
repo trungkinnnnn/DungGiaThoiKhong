@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform _groundCheckTransform;
     [SerializeField] LayerMask _layerGroundMark;
 
+    [Header("Collider")]
+    [SerializeField] Collider2D _hitBoxCollider;
+
     private Movement _movement;
     private PlayerContext _context;
     private StateMachine _stateMachine;
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
         _context = new PlayerContext(
             _input,
             GetComponent<Rigidbody2D>(),
+           _hitBoxCollider,
             GetComponent<PlayerAnimationController>(),
             transform,
             _dataMovement,

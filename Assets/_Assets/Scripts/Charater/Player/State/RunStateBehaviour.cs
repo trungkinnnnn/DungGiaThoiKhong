@@ -12,7 +12,6 @@ public class RunStateBehaviour : IStateBehaviour
     public void Enter()
     {
         _context.Animator.PlayAniRunning(true); 
-        Debug.Log("State Run");
     }
 
     public void Exit()

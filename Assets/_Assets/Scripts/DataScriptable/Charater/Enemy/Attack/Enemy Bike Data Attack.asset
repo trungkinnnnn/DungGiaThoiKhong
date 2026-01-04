@@ -16,6 +16,6 @@ MonoBehaviour:
   timeAttackStart: 1
   timeAttackActive: 0.15
   timeAttackEnd: 1
-  maxRanger: 4
+  maxRanger: 6
   minRanger: 4
   cooldownAttack: 4

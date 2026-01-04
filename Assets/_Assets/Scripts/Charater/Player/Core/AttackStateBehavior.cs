@@ -78,7 +78,7 @@ public abstract class AttackStateBehavior : IStateBehaviour
 
     private void TryCombo()
     {
-        if (!_context.Input.AttackPressed) return;
+        if (!_context.Parameters.AttackPressed) return;
         ChangeStateAttack();
     }
 

@@ -23,6 +23,7 @@ public class DashStateBehaviour : IStateBehaviour
     {
         _context.Parameters.DoneDash = !value;
         _context.Input.Block = value;
+        _context.Collider.enabled = !value;
     }
 
     private void AddForceDash()
