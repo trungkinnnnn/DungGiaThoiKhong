@@ -23,6 +23,7 @@ public class TrainAttack2State : IStateBehaviour
 
     public void Exit()
     {
+        _context.Parameters.IsBlock = false;
         _context.Parameters.TimeAttack2 = _context.DataAttack2.cooldownAttack;
         _time = 0;
         _phase = AttackPhase.Startup;

@@ -60,16 +60,20 @@ public abstract class AttackStateBehavior : IStateBehaviour
 
     }
 
+    protected virtual void SetHitbox(bool value) { }
     private void EnterActive()
     {
         // onhitbox
+        SetHitbox(true);
         _phase = AttackPhase.Active;
         _timer = 0;
+        
     }
 
     private void EnterRecovery()
     {
         // off hitbox
+        SetHitbox(false);
         _phase = AttackPhase.Recovery;
         _timer = 0;
 

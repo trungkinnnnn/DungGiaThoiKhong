@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public class MeleeController : MonoBehaviour
+public class MeleeController : MonoBehaviour, IComBat
 {
     [SerializeField] EnemyDataAttack _dataAttack;
     [SerializeField] EnemyDataMovement _dataMovement;
@@ -15,15 +15,17 @@ public class MeleeController : MonoBehaviour
     private MeleeIdleState _idleState;
     private MeleePatrolState _patrolState;
     protected MeleeChaseState _chaseState;
+
+    private void Awake()
+    {
+        InitContext();     
+    }
     private void Start()
     {
-        InitContext();
         InitState();
         SetUpTransition();
-
         _boundsChecker = GetComponent<WorldBoundsChecker>();
         _stateMachine.Init(_idleState);
-        //_context.Parameters.IsCombat = false;
     }
 
     private void InitContext()
@@ -50,6 +52,9 @@ public class MeleeController : MonoBehaviour
     {
         // ============== AnyState =================
         _stateMachine.AddAnyTransition(_chaseState, () => !_context.Parameters.IsBlock && _context.Parameters.IsCombat);
+
+        // ============== ChaseFlow =================
+        _stateMachine.AddTransition(_chaseState, _patrolState, () => !_context.Parameters.IsBlock && !_context.Parameters.IsCombat);
 
         // ============== IdleMove flow ==============
         _stateMachine.AddTransition(_patrolState, _idleState, () => !_context.Parameters.IsBlock && !_context.Parameters.IsRunning);
@@ -85,6 +90,12 @@ public class MeleeController : MonoBehaviour
     private void UpdateTime()
     {
         if(_context.Parameters.TimeAttack > 0) _context.Parameters.TimeAttack -= Time.deltaTime;    
+    }
+
+    // ============== Service ===========
+    public void SetParaCombat(bool value)
+    {
+        _context.Parameters.IsCombat = value;
     }
 
 }

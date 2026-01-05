@@ -11,7 +11,7 @@ public class RangerContext
     public EnemyAnimationController Animator;
     public EnemyParameters Parameters;
 
-    public PlayerSingle Player;
+    public PlayerSingle _player;
 
     public RangerContext(Transform transform ,Rigidbody2D rigidbody2D, EnemyDataAttack dataAttack, EnemyDataMovement dataMovement, EnemyAnimationController animator)
     {
@@ -21,7 +21,17 @@ public class RangerContext
         DataMovement = dataMovement;
         Animator = animator;
         Parameters = new EnemyParameters();
-        Player = PlayerSingle.Instance;
+        _player = PlayerSingle.Instance;
+    }
+
+    public PlayerSingle Player
+    {
+        get
+        {
+            if (_player == null && PlayerSingle.Instance != null)
+                _player = PlayerSingle.Instance;
+            return _player;
+        }
     }
 }
 

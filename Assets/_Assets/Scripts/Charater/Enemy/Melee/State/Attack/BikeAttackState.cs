@@ -17,10 +17,12 @@ public class BikeAttackState : IStateBehaviour
     {
         _context.Parameters.IsBlock = true;
         _context.Animator.PlayAniAttack();
+        Debug.Log("Attack bike");
     }
 
     public void Exit()
     {
+        _context.Parameters.IsBlock = false;
         _context.Parameters.TimeAttack = _context.DataAttack.cooldownAttack;
         _time = 0;
         _isAttacking = false;

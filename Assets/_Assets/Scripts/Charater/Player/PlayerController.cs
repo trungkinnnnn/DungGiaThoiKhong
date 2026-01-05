@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     [Header("Collider")]
     [SerializeField] Collider2D _hitBoxCollider;
 
+    [Header("Attack")]
+    [SerializeField] GameObject _rockObj;
+
     private Movement _movement;
     private PlayerContext _context;
     private StateMachine _stateMachine;
@@ -69,7 +72,7 @@ public class PlayerController : MonoBehaviour
         _jumpDownState = new JumpDownStateBehaviour(_context);
         _dashState = new DashStateBehaviour(_context);
 
-        _attack3State = new Attack3StateBehaviour(_context);
+        _attack3State = new Attack3StateBehaviour(_context, _rockObj);
         _attack2State = new Attack2StateBehaviour(_context, _stateMachine, _attack3State);
         _attackState = new Attack1StateBehaviour(_context, _stateMachine, _attack2State);
     }       

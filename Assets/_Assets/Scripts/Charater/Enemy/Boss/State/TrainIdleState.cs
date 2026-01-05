@@ -13,7 +13,6 @@ public class TrainIdleState : IStateBehaviour
     {
         _timeHoveState = _context.DataMovement.timeStop;
         _context.Animator.SetBoolAniRunning(false);
-        Debug.Log("Idle");
     }
 
     public void Exit()

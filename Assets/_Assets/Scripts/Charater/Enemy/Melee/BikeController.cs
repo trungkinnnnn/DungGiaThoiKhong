@@ -15,7 +15,7 @@ public class BikeController : MeleeController
 
     protected override void SetUpTransition()
     {
-        _stateMachine.AddAnyTransition(_attackState, () => _context.Parameters.CanAttack && _context.Parameters.TimeAttack <= 0);
+        _stateMachine.AddAnyTransition(_attackState, () => _context.Parameters.CanAttack && _context.Parameters.IsCombat && _context.Parameters.TimeAttack <= 0);
         base.SetUpTransition();
         _stateMachine.AddTransition(_attackState, _chaseState,() => !_context.Parameters.CanAttack && !_context.Parameters.IsBlock);
     }

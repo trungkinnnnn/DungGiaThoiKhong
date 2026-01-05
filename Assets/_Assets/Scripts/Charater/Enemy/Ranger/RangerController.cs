@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class RangerController : MonoBehaviour
+public class RangerController : MonoBehaviour, IComBat
 {
     [SerializeField] EnemyDataAttack _dataAttack;
     [SerializeField] EnemyDataMovement _dataMovement;
@@ -16,9 +16,15 @@ public class RangerController : MonoBehaviour
     private RangerPatrolState _patrolState;
     private RangerChaseState _chaseState;
     private RangerAttackState _attackState;
-    private void Start()
+
+    private void Awake()
     {
         InitContext();
+    }
+
+    private void Start()
+    {
+        
         InitState();
         SetUpTransition();
 
@@ -51,6 +57,9 @@ public class RangerController : MonoBehaviour
         // ============== AnyState =================
         _stateMachine.AddAnyTransition(_attackState, () => _context.Parameters.CanAttack && _context.Parameters.TimeAttack <= 0);
         _stateMachine.AddAnyTransition(_chaseState, () => !_context.Parameters.IsBlock && _context.Parameters.IsCombat);
+
+        // ============== ChaseFlow ==================
+        _stateMachine.AddTransition(_chaseState, _patrolState, () => !_context.Parameters.IsBlock && !_context.Parameters.IsCombat);
 
         // ============== IdleMove flow ==============
         _stateMachine.AddTransition(_patrolState, _idleState, () => !_context.Parameters.IsBlock && !_context.Parameters.IsRunning);
@@ -88,6 +97,9 @@ public class RangerController : MonoBehaviour
     private void UpdateTime()
     {
         if(_context.Parameters.TimeAttack > 0) _context.Parameters.TimeAttack -= Time.deltaTime;
-    }    
+    }
 
+
+    // ============= Service ===========
+    public void SetParaCombat(bool value) => _context.Parameters.IsCombat = value;
 }

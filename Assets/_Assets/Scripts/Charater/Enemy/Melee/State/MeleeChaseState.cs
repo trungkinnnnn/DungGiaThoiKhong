@@ -7,7 +7,8 @@ public class MeleeChaseState : IStateBehaviour
         _context = context;
     }
     public void Enter() {
-        _context.Parameters.CanAttack = false; 
+        _context.Parameters.CanAttack = false;
+        Debug.Log("Chase");
     }
 
     public void Exit() { _context.Parameters.DesiredVelocity = Vector2.zero; }

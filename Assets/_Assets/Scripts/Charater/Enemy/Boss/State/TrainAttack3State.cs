@@ -26,7 +26,6 @@ public class TrainAttack3State : IStateBehaviour
         _phase = AttackPhase.Startup;
         _context.Animator.SetAniAttackDone(false);
         _context.Parameters.IsBlock = false;
-        Debug.Log("Exit");
     }
 
     public void Update()

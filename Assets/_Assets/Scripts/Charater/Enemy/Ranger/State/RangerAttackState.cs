@@ -24,6 +24,7 @@ public class RangerAttackState : IStateBehaviour
         _context.Parameters.IsBlock = true;
         _isAttacking = false;
         _phase = AttackPhase.Startup;
+        _context.Animator.PlayAniAttack();
         CalulateAngleAttack(_context.Player.transform.position);
     }
 
@@ -33,6 +34,7 @@ public class RangerAttackState : IStateBehaviour
         _time = 0f;
         _context.Parameters.CanAttack = false;
         _context.Parameters.TimeAttack = _context.DataAttack.cooldownAttack;
+        _context.Parameters.IsBlock = false;
     }
 
     public void CalulateAngleAttack(Vector3 value)
@@ -73,7 +75,6 @@ public class RangerAttackState : IStateBehaviour
                 else if(!_isAttacking)
                 {
                     _attackObj.SetActive(true);
-                    _context.Animator.PlayAniAttack();
                     _isAttacking = true;
                 }    
                 break;

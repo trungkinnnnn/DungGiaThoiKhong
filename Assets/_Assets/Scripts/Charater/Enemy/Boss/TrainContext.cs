@@ -11,7 +11,7 @@ public class TrainContext
     public TrainAnimationController Animator;
     public TrainParameters Parameters;
 
-    public PlayerSingle Player;
+    private PlayerSingle _player;
 
     public TrainContext(
         Transform transform, 
@@ -30,6 +30,16 @@ public class TrainContext
         DataMovement = dataMovement;
         Animator = animator;
         Parameters = new TrainParameters();
-        Player = PlayerSingle.Instance;
+        _player = PlayerSingle.Instance;
+    }
+
+    public PlayerSingle Player
+    {
+        get
+        {
+            if(_player == null && PlayerSingle.Instance != null)
+                _player = PlayerSingle.Instance;
+            return _player;
+        }
     }
 }

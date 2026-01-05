@@ -4,3 +4,8 @@ public interface IStateBehaviour
     void Update();
     void Exit();    
 }
+
+public interface IComBat
+{
+    void SetParaCombat(bool value);
+}

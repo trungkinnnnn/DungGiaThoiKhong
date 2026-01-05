@@ -8,8 +8,8 @@ public class EnemyParameters
     public bool IsForward;
     public Vector2 DesiredVelocity;
 
-    public bool IsRunning = false;
-    public bool IsCombat = true;
+    public bool IsRunning = true;
+    public bool IsCombat = false;
     public bool IsTakeDame;
     public bool IsBlock;
 

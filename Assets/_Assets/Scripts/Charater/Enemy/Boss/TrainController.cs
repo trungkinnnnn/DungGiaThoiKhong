@@ -4,7 +4,7 @@ using System.Net.WebSockets;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TrainController : MonoBehaviour
+public class TrainController : MonoBehaviour , IComBat
 {
     [SerializeField] EnemyDataAttack _dataAttack1;
     [SerializeField] EnemyDataAttack _dataAttack2;
@@ -26,10 +26,16 @@ public class TrainController : MonoBehaviour
     private TrainAttack1State _attack1State;
     private TrainAttack2State _attack2State;
     private TrainAttack3State _attack3State;
+
+    private void Awake()
+    {
+        InitContext();
+    }
+
     private void Start()
     {
         _playerSingle = PlayerSingle.Instance;
-        InitContext();
+       
         InitState();
         SetUpTransition();
         _boundsChecker = GetComponent<WorldBoundsChecker>();
@@ -63,10 +69,13 @@ public class TrainController : MonoBehaviour
     private void SetUpTransition()
     {
         // ============== AnyState =================
-        _stateMachine.AddAnyTransition(_attack3State, () => !_context.Parameters.IsBlock && _context.Parameters.TimeAttack3 <= 0);
-        _stateMachine.AddAnyTransition(_attack2State, () => !_context.Parameters.IsBlock && _context.Parameters.TimeAttack2 <= 0 && _context.Parameters.CanAttack2);
-        _stateMachine.AddAnyTransition(_attack1State, () => !_context.Parameters.IsBlock && _context.Parameters.TimeAttack1 <= 0 && _context.Parameters.CanAttack1);
+        _stateMachine.AddAnyTransition(_attack3State, () => !_context.Parameters.IsBlock && _context.Parameters.IsCombat && _context.Parameters.TimeAttack3 <= 0);
+        _stateMachine.AddAnyTransition(_attack2State, () => !_context.Parameters.IsBlock && _context.Parameters.IsCombat && _context.Parameters.TimeAttack2 <= 0 && _context.Parameters.CanAttack2);
+        _stateMachine.AddAnyTransition(_attack1State, () => !_context.Parameters.IsBlock && _context.Parameters.IsCombat && _context.Parameters.TimeAttack1 <= 0 && _context.Parameters.CanAttack1);
         _stateMachine.AddAnyTransition(_chaseState, () => !_context.Parameters.IsBlock && _context.Parameters.IsCombat);
+
+        // =============== ChaseFlow ==================
+        _stateMachine.AddTransition(_chaseState, _patrolState, () => !_context.Parameters.IsBlock && !_context.Parameters.IsCombat);
 
         // ============== IdleMove flow ==============
         _stateMachine.AddTransition(_patrolState, _idleState, () => !_context.Parameters.IsBlock && !_context.Parameters.IsRunning);
@@ -116,5 +125,7 @@ public class TrainController : MonoBehaviour
         _context.Parameters.CanAttack2 = Vector2.Distance(transform.position, _playerSingle.transform.position) > _context.DataAttack2.maxRanger;
     }
 
+    // ============== Service ==============
+    public void SetParaCombat(bool value) => _context.Parameters.IsCombat = value;
 
 }

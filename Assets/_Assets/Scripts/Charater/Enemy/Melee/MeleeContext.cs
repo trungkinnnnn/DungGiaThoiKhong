@@ -9,7 +9,7 @@ public class MeleeContext
     public EnemyAnimationController Animator;
     public EnemyParameters Parameters;
 
-    public PlayerSingle Player;
+    private PlayerSingle _player;
 
     public MeleeContext(Transform transform, Rigidbody2D rigidbody2D, EnemyDataAttack dataAttack, EnemyDataMovement dataMovement, EnemyAnimationController animator)
     {
@@ -19,7 +19,17 @@ public class MeleeContext
         DataMovement = dataMovement;
         Animator = animator;
         Parameters = new EnemyParameters();
-        Player = PlayerSingle.Instance;
+        _player = PlayerSingle.Instance;
+    }
+
+    public PlayerSingle Player
+    {
+        get
+        {
+            if (_player == null && PlayerSingle.Instance != null)
+                _player = PlayerSingle.Instance;
+            return _player;
+        }
     }
 }
 
