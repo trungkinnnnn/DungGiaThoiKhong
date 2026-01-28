@@ -8,7 +8,7 @@ public abstract class AttackStateBehavior : IStateBehaviour
     private AttackPhase _phase;
     private float _timer;
 
-    public void Enter()
+    public virtual void Enter()
     {
         _phase = AttackPhase.Startup;
         PlayAnimation();

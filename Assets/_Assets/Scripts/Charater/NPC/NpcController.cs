@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public abstract class NpcController : MonoBehaviour
+{
+    private const string _TAG_PLAYER = "Player";
+
+    [SerializeField] Button _actionButton;
+
+    protected UIController _uiController;
+    private AnimationNpc _npcAni;
+
+    private void Start()
+    {
+        _npcAni = GetComponent<AnimationNpc>();
+        _actionButton.onClick.AddListener(HandleAction);
+        _uiController = UIController.Instance;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag(_TAG_PLAYER))
+        {
+            _npcAni.PlayAniOpen();
+        }    
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag(_TAG_PLAYER))
+        {
+            _npcAni.PlayAniClose();
+        }    
+    }
+
+    // ================= Action ================
+    protected abstract void HandleAction();
+
+}

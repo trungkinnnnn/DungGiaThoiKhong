@@ -12,6 +12,12 @@ public class Attack2StateBehaviour : AttackStateBehavior
         _stateAttack3 = state;
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+    }
+
     protected override void ChangeStateAttack()
     {
          _stateMachine.ChangeState(_stateAttack3);

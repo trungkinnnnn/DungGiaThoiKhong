@@ -19,6 +19,10 @@ public class BlackHoleController : MonoBehaviour
     private void SpawnObj()
     {
         var obj = Instantiate(_obj, transform.position, Quaternion.identity);
+        if(obj.TryGetComponent<RangerController>(out  RangerController controller))
+        {
+            controller.SetParaCombat(true);
+        }
     }    
 
 

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   timeAttackStart: 0.3
-  timeAttackActive: 1
+  timeAttackActive: 1.2
   timeAttackEnd: 1.5
-  maxRanger: 10
+  maxRanger: 6
   minRanger: 0
   cooldownAttack: 7

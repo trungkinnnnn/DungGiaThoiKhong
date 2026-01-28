@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Enemy Drone Data Attack
   m_EditorClassIdentifier: 
   damage: 1
-  timeAttackStart: 0.5
-  timeAttackActive: 1
-  timeAttackEnd: 0.5
+  timeAttackStart: 0.8
+  timeAttackActive: 1.5
+  timeAttackEnd: 1
   maxRanger: 4
   minRanger: 3.5
   cooldownAttack: 4

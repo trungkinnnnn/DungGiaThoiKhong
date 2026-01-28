@@ -19,6 +19,19 @@ public class TrainAttack2State : IStateBehaviour
     {
         _context.Parameters.IsBlock = true;
         _context.Animator.PlayAniAttack2();
+
+        Vector2 meleePos = _context.Transform.position;
+        Vector2 playerPos = _context.Player.transform.position;
+        float dirX = (playerPos - meleePos).normalized.x;
+        FacePlayer(dirX);
+    }
+
+
+    private void FacePlayer(float dirX)
+    {
+        Vector3 scale = _context.Transform.localScale;
+        scale.x = dirX > 0 ? 1 : -1;
+        _context.Transform.localScale = scale;
     }
 
     public void Exit()
